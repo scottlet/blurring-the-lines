@@ -83,24 +83,33 @@ module.exports = function(grunt) {
                         dest:'examples/js/'
                     }
                 ]
+            },
+            fonts: {
+                files: [
+                    {
+                        expand:true,
+                        src:['fonts/*'], 
+                        dest:'examples/'
+                    }
+                ]
             }
-        }/*,
+        },
         compass: {
             all: {
                 options: {
                     httpPath: '/',
-                    cssDir: "site/css",
+                    cssDir: "examples/css",
                     sassDir: "src/sass",
                     imagesDir: "src/images",
-                    javascriptsDir: "site/js",
-                    fontsDir: "../fonts/",
-                    httpFontsPath: "../fonts",
+                    javascriptsDir: "examples/js",
+                    fontsDir: "src/fonts/",
+                    httpFontsPath: "src/fonts",
                     outputStyle: "compressed",
                     lineComments: false,
                     colorOutput: false
                 }
             }
-        }*/
+        }
     });
     
     grunt.registerTask('build', ['jshint', 'uglify', 'copy']);

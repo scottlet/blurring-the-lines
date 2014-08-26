@@ -14,6 +14,27 @@
          * @return {jQueryObject}         the object passed in.
          */
         function Accordion(options, tablet) {
+
+            var EVENT_END = (typeof window.ontouchstart === "undefined") ? 'mouseup' : 'touchend';
+            function bindClickEvent($obj, fn) {
+                var ent;
+                $obj.on('click', function (e) {
+                    prevent(e);
+                    ent = e;
+                }).on('touchstart', function (e) {
+                    ent = e;
+                    sliding = false;
+                }).on('touchmove', function () {
+                    sliding = true;
+                }).on(EVENT_END, function (e) {
+                    if (typeof e !== "undefined") {
+                        ent = e;
+                    }
+                    if (!sliding) {
+                        fn($(this), ent);
+                    }
+                });
+            }
             
             return {
                 moveto : scrollto,
