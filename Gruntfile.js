@@ -27,19 +27,20 @@ module.exports = function(grunt) {
                 
             },
             html: {
-                files: ['examples/**/*.html'],
+                files: ['src/**/*.html'],
+                tasks: ['copy:html'],
                 options: {livereload: true}
             },
             js: {
                 files: ['src/**.js'],
-                tasks: ['jshint', 'uglify'],
+                tasks: ['jshint', 'uglify', 'copy:js'],
                 options: { livereload: true }
             }
         },
         jshint: {
             all: [
                 'Gruntfile.js',
-                'src/*.js'
+                'src/js/*.js'
             ]
         },
         uglify: {
@@ -52,7 +53,7 @@ module.exports = function(grunt) {
             },
             component: {
                 files: {
-                    'examples/js/hwaccordion.min.js' : ['src/hwaccordion.js']
+                    'jq.akaccordion.min.js' : ['src/js/akaccordion.js']
                 }
             }
         },
@@ -79,7 +80,7 @@ module.exports = function(grunt) {
                 files: [
                     {
                         expand:true,
-                        src:['jq.akcarousel.min.js'], 
+                        src:['jq.akaccordion.min.js'], 
                         dest:'examples/js/'
                     }
                 ]
@@ -88,7 +89,18 @@ module.exports = function(grunt) {
                 files: [
                     {
                         expand:true,
+                        cwd:'src',
                         src:['fonts/*'], 
+                        dest:'examples/'
+                    }
+                ]
+            },
+            html: {
+                files: [
+                    {
+                        expand:true,
+                        cwd:'src',
+                        src:['*.html'], 
                         dest:'examples/'
                     }
                 ]
@@ -102,8 +114,8 @@ module.exports = function(grunt) {
                     sassDir: "src/sass",
                     imagesDir: "src/images",
                     javascriptsDir: "examples/js",
-                    fontsDir: "src/fonts/",
-                    httpFontsPath: "src/fonts",
+                    fontsDir: "../fonts/",
+                    httpFontsPath: "../fonts",
                     outputStyle: "compressed",
                     lineComments: false,
                     colorOutput: false

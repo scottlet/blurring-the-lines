@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Normal Javascript accordion</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <style type="text/css">
+        nav {
+            left: -160px;
+            -webkit-transition:left 400ms ease-in-out;
+        }
+        nav.open {
+            left: -10px;
+        }
+        ul.sub {
+            -webkit-transition:height 400ms ease-in-out;
+            height:0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Example 2 - css3 animate</h1>
+    <nav>
+        <div class="tab icon-menu">Open menu</div>
+        <a href="#Menu1" class="icon-home menu1">Menu 1</a>
+        <ul class="sub menu1">
+            <li><a href="#Sub Menu1">Sub Menu 1</a></li>
+            <li><a href="#Sub Menu2">Sub Menu 2</a></li>
+            <li><a href="#Sub Menu3">Sub Menu 3</a></li>
+        </ul>
+        <a href="#Menu2" class="icon-newspaper menu2">Menu 2</a>
+        <ul class="sub menu2">
+            <li><a href="#Sub Menu1">Sub Menu 1</a></li>
+            <li><a href="#Sub Menu2">Sub Menu 2</a></li>
+            <li><a href="#Sub Menu3">Sub Menu 3</a></li>
+        </ul>
+        <a href="#Menu3" class="icon-quill menu3">Menu 3</a>
+        <ul class="sub menu3">
+            <li><a href="#Sub Menu1">Sub Menu 1</a></li>
+            <li><a href="#Sub Menu2">Sub Menu 2</a></li>
+            <li><a href="#Sub Menu3">Sub Menu 3</a></li>
+        </ul>
+        <a href="#Menu4" class="icon-images menu4">Menu 4</a>
+        <ul class="sub menu4">
+            <li><a href="#Sub Menu1">Sub Menu 1</a></li>
+            <li><a href="#Sub Menu2">Sub Menu 2</a></li>
+            <li><a href="#Sub Menu3">Sub Menu 3</a></li>
+        </ul>
+        <a href="#Menu5" class="icon-camera menu5">Menu 5</a>
+        <ul class="sub menu5">
+            <li><a href="#Sub Menu1">Sub Menu 1</a></li>
+            <li><a href="#Sub Menu2">Sub Menu 2</a></li>
+            <li><a href="#Sub Menu3">Sub Menu 3</a></li>
+        </ul>
+    </nav>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $('div.tab').on('click', function () {
+            $('nav').toggleClass('open');
+        });
+        $('a[class*="menu"]').on('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var cls = $(this).attr('class').replace(/icon-[a-z]+ /gi, ''),
+                h,
+                $ul = $('ul.' + cls);
+            if ($ul.hasClass('open')) {
+                console.log('ere');
+                $ul.height(0);
+                setTimeout(function () {
+                    $ul.removeClass('open').removeAttr('style');
+                }, 500);
+            } else {
+                var $old = $('ul.open');
+                $old.height(0);
+                setTimeout(function () {
+                    $old.removeClass('open').removeAttr('style');
+                }, 500);
+                h = $ul.addClass('open').height();
+                $ul.css('height', 0);
+                setTimeout(function () {
+                    $ul.height(h);
+                }, 1);
+            }
+        });
+    </script>
+</body>
+</html>
+
