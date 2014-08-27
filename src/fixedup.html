@@ -53,6 +53,7 @@
     <script type="text/javascript">
         var swiping = false,
             evt;
+        document.body.addEventListener('touchstart', function(){}); /* bug in chrome Android. https://code.google.com/p/chromium/issues/detail?id=253456 */
         $('div.tab').on('touchstart', function () {
             swiping = false;
         }).on('touchmove', function () {
@@ -62,9 +63,13 @@
                 $('.slide').toggleClass('open');
             }
         });
-        $('a[class*="menu"]').on('touchstart', function () {
+        $('a[class*="menu"]').on('touchstart', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
             swiping = false;
-        }).on('touchmove', function () {
+        }).on('touchmove', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
             swiping = true;
         }).on('touchend', function () {
             if (swiping === false) {
@@ -100,14 +105,14 @@
             e.preventDefault();
             e.stopPropagation();
         });
-        /*$('body').on('touchstart', function (e) {
+        $('body').on('touchstart', function (e) {
             $('#touches').css({
                 top: e.originalEvent.pageY,
                 left: e.originalEvent.pageX,
             }).addClass('show');
         }).on('touchend', function (e) {
             $('#touches').removeClass('show');
-        });*/
+        });
     </script>
 </body>
 </html>
