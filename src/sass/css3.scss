@@ -1,0 +1,12 @@
+@import "compass/css3";
+section#content .slide {
+    left: 0;
+    @include transition(left 400ms ease-in-out);
+}
+section#content .slide.open {
+    left: 150px;
+}
+ul.sub {
+    @include transition(height 400ms ease-in-out);
+    height:0;
+}

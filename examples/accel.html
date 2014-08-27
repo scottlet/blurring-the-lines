@@ -2,45 +2,98 @@
 <html>
 <head>
     <title>Normal Javascript accordion</title>
+    <meta name="viewport" content="width=320, user-scalable=no">
     <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link rel="stylesheet" type="text/css" href="css/accel.css" />
 </head>
 <body>
-    <h1>Example 1 - jQuery animate</h1>
-    <nav>
-        <div class="tab icon-menu">Open menu</div>
-        <a href="#Menu1" class="icon-home menu1">Menu 1</a>
-        <ul class="sub menu1">
-            <li><a href="#Sub Menu1">Sub Menu 1</a></li>
-            <li><a href="#Sub Menu2">Sub Menu 2</a></li>
-            <li><a href="#Sub Menu3">Sub Menu 3</a></li>
-        </ul>
-        <a href="#Menu2" class="icon-newspaper menu2">Menu 2</a>
-        <ul class="sub menu2">
-            <li><a href="#Sub Menu1">Sub Menu 1</a></li>
-            <li><a href="#Sub Menu2">Sub Menu 2</a></li>
-            <li><a href="#Sub Menu3">Sub Menu 3</a></li>
-        </ul>
-        <a href="#Menu3" class="icon-quill menu3">Menu 3</a>
-        <ul class="sub menu3">
-            <li><a href="#Sub Menu1">Sub Menu 1</a></li>
-            <li><a href="#Sub Menu2">Sub Menu 2</a></li>
-            <li><a href="#Sub Menu3">Sub Menu 3</a></li>
-        </ul>
-        <a href="#Menu4" class="icon-images menu4">Menu 4</a>
-        <ul class="sub menu4">
-            <li><a href="#Sub Menu1">Sub Menu 1</a></li>
-            <li><a href="#Sub Menu2">Sub Menu 2</a></li>
-            <li><a href="#Sub Menu3">Sub Menu 3</a></li>
-        </ul>
-        <a href="#Menu5" class="icon-camera menu5">Menu 5</a>
-        <ul class="sub menu5">
-            <li><a href="#Sub Menu1">Sub Menu 1</a></li>
-            <li><a href="#Sub Menu2">Sub Menu 2</a></li>
-            <li><a href="#Sub Menu3">Sub Menu 3</a></li>
-        </ul>
-    </nav>
-    <script src="js/jq.akaccordion.min.js" type="text/javascript"></script>
+    <div id="touches"></div>
+     <section id="content">
+        <div class="slide">
+            <h1>Example 3 - css3 animate using translate3d transitions</h1>
+            <a href="/" class="icon-home">Home</a>
+            <nav>
+                <div class="tab icon-menu">Open menu</div>
+                <a href="#Menu1" class="icon-home menu1">Menu 1</a>
+                <ul class="sub menu1">
+                    <li><a href="#SubMenu1">Sub 1 Menu 1</a></li>
+                    <li><a href="#SubMenu2">Sub 1 Menu 2</a></li>
+                    <li><a href="#SubMenu3">Sub 1 Menu 3</a></li>
+                    <li><a href="#SubMenu4">Sub 1 Menu 4</a></li>
+                </ul>
+                <a href="#Menu2" class="icon-newspaper menu2">Menu 2</a>
+                <ul class="sub menu2">
+                    <li><a href="#SubMenu1">Sub 2 Menu 1</a></li>
+                    <li><a href="#SubMenu2">Sub 2 Menu 2</a></li>
+                </ul>
+                <a href="#Menu3" class="icon-quill menu3">Menu 3</a>
+                <ul class="sub menu3">
+                    <li><a href="#SubMenu1">Sub 3 Menu 1</a></li>
+                    <li><a href="#SubMenu2">Sub 3 Menu 2</a></li>
+                    <li><a href="#SubMenu3">Sub 3 Menu 3</a></li>
+                </ul>
+                <a href="#Menu4" class="icon-images menu4">Menu 4</a>
+                <ul class="sub menu4">
+                    <li><a href="#SubMenu1">Sub 4 Menu 1</a></li>
+                    <li><a href="#SubMenu2">Sub 4 Menu 2</a></li>
+                    <li><a href="#SubMenu3">Sub 4 Menu 3</a></li>
+                    <li><a href="#SubMenu3">Sub 4 Menu 4</a></li>
+                    <li><a href="#SubMenu3">Sub 4 Menu 5</a></li>
+                </ul>
+                <a href="#Menu5" class="icon-camera menu5">Menu 5</a>
+                <ul class="sub menu5">
+                    <li><a href="#SubMenu1">Sub 5 Menu 1</a></li>
+                    <li><a href="#SubMenu2">Sub 5 Menu 2</a></li>
+                    <li><a href="#SubMenu3">Sub 5 Menu 3</a></li>
+                </ul>
+            </nav>
+        </div>
+    </section>
     <script src="https://code.jquery.com/jquery-1.11.1.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $('div.tab').on('click', function () {
+            $('.slide').toggleClass('open');
+        });
+        $('a[class*="menu"]').on('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var cls = $(this).attr('class').replace(/icon-[a-z]+ /gi, ''),
+                h,
+                $ul = $('ul.' + cls),
+                $this = $(this),
+                $navs = $('nav>a'),
+                index = $navs.index($('a.' + cls));
+            if ($ul.hasClass('open')) {
+                $navs.css({
+                    '-webkit-transform' : 'translate3d(0,0,0)'
+                });
+                $ul.removeClass('open');
+                $this.removeClass('open');
+            } else {
+                var $old = $('ul.open'),
+                    $olda = $('a.open');
+                $navs.css({
+                    '-webkit-transform' : 'translate3d(0,0,0)'
+                });
+                $old.removeClass('open');
+                
+                h = $ul.addClass('open').height();
+                for (var n = index + 1, l = $navs.length; n < l; n++) {
+                    $navs.eq(n).css({
+                        '-webkit-transform' : 'translate3d(0,' + h + 'px, 0)'
+                    });
+                }
+            }
+        });
+        /*$('body').on('touchstart', function (e) {
+            $('#touches').css({
+                top: e.originalEvent.pageY,
+                left: e.originalEvent.pageX,
+            }).addClass('show');
+        }).on('touchend', function (e) {
+            $('#touches').removeClass('show');
+        });*/
+    </script>
 </body>
 </html>
 

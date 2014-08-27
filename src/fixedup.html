@@ -4,12 +4,13 @@
     <title>Normal Javascript accordion</title>
     <meta name="viewport" content="width=320, user-scalable=no">
     <link rel="stylesheet" type="text/css" href="css/main.css" />
-    <link rel="stylesheet" type="text/css" href="css/jquery.css" />
+    <link rel="stylesheet" type="text/css" href="css/fixedup.css" />
 </head>
 <body>
+    <div id="touches"></div>
     <section id="content">
         <div class="slide">
-            <h1>Example 1 - jQuery animate</h1>
+            <h1>Example 4 - css3 animate using translate3d transitions and touch events and tweaks</h1>
             <a href="/" class="icon-home">Home</a>
             <nav>
                 <div class="tab icon-menu">Open menu</div>
@@ -50,34 +51,63 @@
     </section>
     <script src="https://code.jquery.com/jquery-1.11.1.min.js" type="text/javascript"></script>
     <script type="text/javascript">
-        $('div.tab').on('click', function () {
-            var $this = $('.slide');
-            if ($this.data('open')) {
-                $this.animate({'left': 0});
-                $this.data('open', false);
-            } else {
-                $this.animate({'left': 150});
-                $this.data('open', true);
+        var swiping = false,
+            evt;
+        $('div.tab').on('touchstart', function () {
+            swiping = false;
+        }).on('touchmove', function () {
+            swiping = true;
+        }).on('touchend', function () {
+            if (swiping === false) {
+                $('.slide').toggleClass('open');
             }
         });
-        $('a[class*="menu"]').on('click', function (e) {
+        $('a[class*="menu"]').on('touchstart', function () {
+            swiping = false;
+        }).on('touchmove', function () {
+            swiping = true;
+        }).on('touchend', function () {
+            if (swiping === false) {
+                var cls = $(this).attr('class').replace(/icon-[a-z]+ /gi, ''),
+                    h,
+                    $ul = $('ul.' + cls),
+                    $this = $(this),
+                    $navs = $('nav>a'),
+                    index = $navs.index($('a.' + cls));
+                if ($ul.hasClass('open')) {
+                    $navs.css({
+                        '-webkit-transform' : 'translate3d(0,0,0)'
+                    });
+                    $ul.removeClass('open');
+                    $this.removeClass('open');
+                } else {
+                    var $old = $('ul.open'),
+                        $olda = $('a.open');
+                    $navs.css({
+                        '-webkit-transform' : 'translate3d(0,0,0)'
+                    });
+                    $old.removeClass('open');
+                    
+                    h = $ul.addClass('open').height();
+                    for (var n = index + 1, l = $navs.length; n < l; n++) {
+                        $navs.eq(n).css({
+                            '-webkit-transform' : 'translate3d(0,' + h + 'px, 0)'
+                        });
+                    }
+                }
+            }
+        }).on('click', function (e) {
             e.preventDefault();
             e.stopPropagation();
-            var cls = $(this).attr('class').replace(/icon-[a-z]+ /gi, ''),
-                h,
-                $ul = $('ul.' + cls);
-            if ($ul.hasClass('open')){
-                $ul.animate({'height': 0}, function () {
-                    $ul.removeClass('open').removeAttr('style');
-                });
-            } else {
-                $('ul.open').animate({'height': 0}, function () {
-                    $(this).removeClass('open').removeAttr('style');
-                });
-                h = $('ul.' + cls).addClass('open').outerHeight();
-                $ul.css('height', 0).animate({'height': h});
-            }
         });
+        /*$('body').on('touchstart', function (e) {
+            $('#touches').css({
+                top: e.originalEvent.pageY,
+                left: e.originalEvent.pageX,
+            }).addClass('show');
+        }).on('touchend', function (e) {
+            $('#touches').removeClass('show');
+        });*/
     </script>
 </body>
 </html>

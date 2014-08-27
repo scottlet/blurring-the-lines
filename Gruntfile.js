@@ -116,7 +116,7 @@ module.exports = function(grunt) {
                     javascriptsDir: "examples/js",
                     fontsDir: "../fonts/",
                     httpFontsPath: "../fonts",
-                    outputStyle: "compressed",
+                    outputStyle: "expanded",
                     lineComments: false,
                     colorOutput: false
                 }
@@ -124,6 +124,6 @@ module.exports = function(grunt) {
         }
     });
     
-    grunt.registerTask('build', ['jshint', 'uglify', 'copy']);
+    grunt.registerTask('build', ['compass', 'jshint', 'uglify', 'copy']);
     grunt.registerTask('server', ['build','connect:livereload','watch']);
 };

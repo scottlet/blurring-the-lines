@@ -1,0 +1,41 @@
+@import "compass/css3";
+body,
+html {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: transparent; /* For some Androids */
+}
+section#content {
+    .slide {
+        left: 0;
+        @include transform(translate3d(0, 0, 0));
+        @include transition(transform 400ms ease-in-out);
+        &.open {
+            @include transform(translate3d(150px, 0, 0));
+        }
+        nav{
+            &>a {
+                @include transition(transform 400ms ease-in-out);
+                position:relative;
+                z-index:2;
+                left:0;
+                right:0;
+                width:100%;
+            }
+            .sub {
+                position:absolute;
+                display:block;
+                opacity:0;
+                height:auto;
+                z-index:1;
+                left:0;
+                right:0;
+                pointer-events:none;
+                @include transition(opacity 400ms ease-in-out);
+                &.open {
+                    opacity:1;
+                    pointer-events:auto;
+                }
+            }
+        }
+    }
+}
