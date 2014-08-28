@@ -8,10 +8,10 @@
 </head>
 <body>
     <div id="touches"></div>
-     <section id="content">
+    <section id="content">
         <div class="slide">
             <h1>Example 3 - css3 animate using translate3d transitions</h1>
-            <a href="/" class="icon-home">Home</a>
+            <a href="index.html" class="icon-home">Home</a>
             <nav>
                 <div class="tab icon-menu">Open menu</div>
                 <a href="#Menu1" class="icon-home menu1">Menu 1</a>
@@ -85,14 +85,14 @@
                 }
             }
         });
-        $('body').on('touchstart', function (e) {
+        /*$('body').on('touchstart', function (e) {
             $('#touches').css({
-                top: e.originalEvent.pageY,
-                left: e.originalEvent.pageX,
+                top: e.originalEvent.touches[0].clientY,
+                left: e.originalEvent.touches[0].clientX,
             }).addClass('show');
         }).on('touchend', function (e) {
             $('#touches').removeClass('show');
-        });
+        });*/
     </script>
 </body>
 </html>

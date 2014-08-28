@@ -59,7 +59,7 @@ nav {
     left:-160px;
     padding-left:10px;
     padding-top:10px;
-    box-shadow: inset 0 0 20px rgba(0,0,0,0.3);
+    box-shadow: inset -2px 0px 0px 0px rgba(0,0,0,1);
     position:absolute;
     background:#556;
     bottom:-10px;
@@ -90,14 +90,16 @@ nav {
         display:block;
         height:30px;
         line-height:30px;
-        text-indent:10px;
+        text-indent:20px;
         text-decoration: none;
         font-weight:100;
         color:#fff;
+        font-size:14px;
         font-family:'Helvetica Neue';
         &:before {
+            font-size:16px;
             line-height:30px;
-            padding-right:5px;
+            padding-right:15px;
         }
         &.menu1 {
             border:none;
@@ -128,12 +130,13 @@ nav {
 }
 #touches {
     z-index:2;
-    background:rgba(255, 0, 0, 0.5);
+    background:inline-image('finger.png') no-repeat center center;
+    background-size:contain;
     border-radius:15px;
-    width:30px;
-    height:30px;
-    margin-left:-15px;
-    margin-top:-15px;
+    width:40px;
+    height:40px;
+    margin-left:-20px;
+    margin-top:-20px;
     position:absolute;
     opacity:0;
     pointer-events:none;

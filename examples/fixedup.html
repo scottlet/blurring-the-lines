@@ -11,7 +11,7 @@
     <section id="content">
         <div class="slide">
             <h1>Example 4 - css3 animate using translate3d transitions and touch events and tweaks</h1>
-            <a href="/" class="icon-home">Home</a>
+            <a href="index.html" class="icon-home">Home</a>
             <nav>
                 <div class="tab icon-menu">Open menu</div>
                 <a href="#Menu1" class="icon-home menu1">Menu 1</a>
@@ -53,7 +53,7 @@
     <script type="text/javascript">
         var swiping = false,
             evt;
-        document.body.addEventListener('touchstart', function(){}); /* bug in chrome Android. https://code.google.com/p/chromium/issues/detail?id=253456 */
+        document.body.addEventListener('touchstart', function(){}); /* bug in chrome Android.  */
         $('div.tab').on('touchstart', function () {
             swiping = false;
         }).on('touchmove', function () {
@@ -64,12 +64,8 @@
             }
         });
         $('a[class*="menu"]').on('touchstart', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
             swiping = false;
         }).on('touchmove', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
             swiping = true;
         }).on('touchend', function () {
             if (swiping === false) {
@@ -107,8 +103,8 @@
         });
         $('body').on('touchstart', function (e) {
             $('#touches').css({
-                top: e.originalEvent.pageY,
-                left: e.originalEvent.pageX,
+                top: e.originalEvent.touches[0].clientY,
+                left: e.originalEvent.touches[0].clientX,
             }).addClass('show');
         }).on('touchend', function (e) {
             $('#touches').removeClass('show');

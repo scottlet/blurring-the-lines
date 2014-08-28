@@ -9,35 +9,39 @@ html {
 /* line 8, ../../src/sass/fixedup.scss */
 section#content .slide {
   left: 0;
+  -webkit-transform: translate3d(0, 0, 0);
   -moz-transform: translate3d(0, 0, 0);
   -ms-transform: translate3d(0, 0, 0);
-  -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
-  -moz-transition: -moz-transform 400ms ease-in-out;
-  -o-transition: -o-transform 400ms ease-in-out;
   -webkit-transition: -webkit-transform 400ms ease-in-out;
-  transition: transform 400ms ease-in-out;
+  -moz-transition: -webkit-transform 400ms ease-in-out;
+  -ms-transition: -webkit-transform 400ms ease-in-out;
+  transition: -webkit-transform 400ms ease-in-out;
 }
-/* line 12, ../../src/sass/fixedup.scss */
+/* line 18, ../../src/sass/fixedup.scss */
 section#content .slide.open {
   -moz-transform: translate3d(150px, 0, 0);
   -ms-transform: translate3d(150px, 0, 0);
   -webkit-transform: translate3d(150px, 0, 0);
   transform: translate3d(150px, 0, 0);
 }
-/* line 16, ../../src/sass/fixedup.scss */
+/* line 21, ../../src/sass/fixedup.scss */
+section#content .slide nav {
+  position: absolute;
+}
+/* line 23, ../../src/sass/fixedup.scss */
 section#content .slide nav > a {
-  -moz-transition: -moz-transform 400ms ease-in-out;
-  -o-transition: -o-transform 400ms ease-in-out;
   -webkit-transition: -webkit-transform 400ms ease-in-out;
+  -moz-transition: -moz-transform 400ms ease-in-out;
+  -ms-transition: -ms-transform 400ms ease-in-out;
   transition: transform 400ms ease-in-out;
   position: relative;
   z-index: 2;
   left: 0;
-  right: 0;
-  width: 100%;
+  right: 2px;
+  width: 99%;
 }
-/* line 24, ../../src/sass/fixedup.scss */
+/* line 34, ../../src/sass/fixedup.scss */
 section#content .slide nav .sub {
   position: absolute;
   display: block;
@@ -45,14 +49,14 @@ section#content .slide nav .sub {
   height: auto;
   z-index: 1;
   left: 0;
-  right: 0;
+  right: 2px;
   pointer-events: none;
-  -moz-transition: opacity 400ms ease-in-out;
-  -o-transition: opacity 400ms ease-in-out;
-  -webkit-transition: opacity 400ms ease-in-out;
-  transition: opacity 400ms ease-in-out;
+  -webkit-transition: opacity 400ms ease-in-out 100ms;
+  -moz-transition: opacity 400ms ease-in-out 100ms;
+  -ms-transition: opacity 400ms ease-in-out 100ms;
+  transition: opacity 400ms ease-in-out 100ms;
 }
-/* line 34, ../../src/sass/fixedup.scss */
+/* line 47, ../../src/sass/fixedup.scss */
 section#content .slide nav .sub.open {
   opacity: 1;
   pointer-events: auto;
