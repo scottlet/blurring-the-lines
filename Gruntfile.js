@@ -30,11 +30,6 @@ module.exports = function(grunt) {
                 files: ['src/**/*.html'],
                 tasks: ['copy:html'],
                 options: {livereload: true}
-            },
-            js: {
-                files: ['src/**.js'],
-                tasks: ['jshint', 'uglify', 'copy:js'],
-                options: { livereload: true }
             }
         },
         jshint: {
@@ -50,11 +45,6 @@ module.exports = function(grunt) {
                 preserveComments: 'some'
                 /*,
                 preserveComments: 'some'*/
-            },
-            component: {
-                files: {
-                    'jq.akaccordion.min.js' : ['src/js/akaccordion.js']
-                }
             }
         },
         connect: {
@@ -76,15 +66,6 @@ module.exports = function(grunt) {
             }
         },
         copy: {
-            js: {
-                files: [
-                    {
-                        expand:true,
-                        src:['jq.akaccordion.min.js'], 
-                        dest:'examples/js/'
-                    }
-                ]
-            },
             fonts: {
                 files: [
                     {
